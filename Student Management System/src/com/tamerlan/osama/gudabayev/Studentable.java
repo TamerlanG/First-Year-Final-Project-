@@ -4,7 +4,7 @@ public interface Studentable {
 
 	String getName();
 	String getSurname();
-	Boolean getIsMale();
+	String getGender();
 	Double getMathGpa();
 	Double getPhysicsGpa();
 	Double getComputerGpa();

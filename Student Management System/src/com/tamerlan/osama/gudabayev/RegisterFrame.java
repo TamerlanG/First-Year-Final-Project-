@@ -91,21 +91,29 @@ public class RegisterFrame extends Teacher {
 				String username = userTextField.getText();
 				String password = passwordTextField.getText();
 				
+			if(teacherExists(username)) {
+				JOptionPane.showMessageDialog(frame, "ACCOUNT NAME ALREADY EXISTS");
+			}
+			else
+			{
 				Teachers.add(new Teacher(username, password));
 				
 				for(int i = 0;i < Teachers.size(); i++)
 				{
 					
 					teacherPrinter.append(Teachers.get(i).getName() + " " + Teachers.get(i).getPassword() + "\n");
-									}
+					
+				}
 				
 				
-				Teachers.removeAll(Teachers);
+				
 				Main instance = new Main();
 				instance.fileToArray();
 				teacherPrinter.flush();
 				JOptionPane.showMessageDialog(frame, "Account Created");
 				frame.dispose();
+				
+			}
 				
 
 				
@@ -114,5 +122,22 @@ public class RegisterFrame extends Teacher {
 		springLayout.putConstraint(SpringLayout.NORTH, btnSignUp, 31, SpringLayout.SOUTH, passwordTextField);
 		springLayout.putConstraint(SpringLayout.WEST, btnSignUp, 115, SpringLayout.WEST, frame.getContentPane());
 		frame.getContentPane().add(btnSignUp);
+	}
+	
+	public boolean teacherExists(String name)
+	{
+		
+		for(int i = 0; i < Teachers.size(); i++) 
+		{
+			System.out.println(Teachers.get(i).getName());
+			if(Teachers.get(i).getName().equals(name))
+			{
+				System.out.println("Name Exists");
+				return true;	
+			}
+			
+		}
+		return false;
+		
 	}
 }

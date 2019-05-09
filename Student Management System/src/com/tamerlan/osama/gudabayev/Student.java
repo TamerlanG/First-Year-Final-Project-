@@ -1,5 +1,6 @@
 package com.tamerlan.osama.gudabayev;
 
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,7 +12,7 @@ public class Student implements Studentable {
 
 	String name;
 	String surname;
-	Boolean isMale;
+	String Gender;
 	int age;
 	Double mathGpa;
 	Double physicsGpa;
@@ -19,7 +20,7 @@ public class Student implements Studentable {
 	Double averageGpa;
 	
 	Scanner reader;
-	File fileStudent = new File("student.txt");
+	static File fileStudent = new File("student.txt");
 	public ArrayList<Student> studentArrayList = new ArrayList<Student>(); 
 	PrintWriter studentPrintWriter;
 	
@@ -33,17 +34,25 @@ public class Student implements Studentable {
 								}
 	}
 	
-	public Student(String name, String surname, Boolean isMale, int age, Double mathGpa, Double physicsGpa,
-			Double computerGpa, Double averageGpa) {
+	public Student(String name, String surname, String gender, int age, Double mathGpa, Double physicsGpa,
+			Double computerGpa, Double averageGPA) {
 		super();
 		this.name = name;
 		this.surname = surname;
-		this.isMale = isMale;
+		this.Gender = gender;
 		this.age = age;
 		this.mathGpa = mathGpa;
 		this.physicsGpa = physicsGpa;
 		this.computerGpa = computerGpa;
-		this.averageGpa = averageGpa;
+		this.averageGpa = averageGPA;
+	}
+
+	public String getGender() {
+		return Gender;
+	}
+
+	public void setGender(String gender) {
+		Gender = gender;
 	}
 
 	public Student() {
@@ -64,14 +73,6 @@ public class Student implements Studentable {
 
 	public void setSurname(String surname) {
 		this.surname = surname;
-	}
-
-	public Boolean getIsMale() {
-		return isMale;
-	}
-
-	public void setIsMale(Boolean isMale) {
-		this.isMale = isMale;
 	}
 
 	public int getAge() {
@@ -107,8 +108,43 @@ public class Student implements Studentable {
 	}
 
 	public Double getAverageGpa(Double mathGpa, Double physicsGpa, Double computerGpa) {
+		Double averageGpa = (mathGpa + physicsGpa + computerGpa) / 3;
 		return averageGpa;
 	}
+	
+	public boolean searchStudent(String name, String surname) {
+		for(int i = 0; i < studentArrayList.size(); i++)
+		{
+			if(name.equals(studentArrayList.get(i).getName()) && (surname.equals(studentArrayList.get(i).getSurname())))
+			{
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		return false;
+	}
+	
+	public void fileToArray() {
+		while(reader.hasNext())
+		{
+			studentArrayList.add(new Student(reader.next(), reader.next(), reader.next(), reader.nextInt(), 
+					reader.nextDouble(), reader.nextDouble(), reader.nextDouble(), reader.nextDouble()));
+		}
+		
+		reader.close();
+	}
+	
+	
+	// copied from stackoverflow
+	public static void clearTheFile() throws IOException {
+		FileWriter fwob = new FileWriter(fileStudent, false);
+        PrintWriter pwOb = new PrintWriter(fwob);
+        pwOb.flush();
+        pwOb.close();
+        fwob.close();
+    }
 
 }
 

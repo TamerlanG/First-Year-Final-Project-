@@ -15,6 +15,10 @@ import java.awt.event.ActionEvent;
 import javax.swing.SpringLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JCheckBox;
+import javax.swing.UIManager;
+import javax.swing.ImageIcon;
+import java.awt.Font;
 
 public class Main extends Methods {
 
@@ -56,39 +60,32 @@ public class Main extends Methods {
 	private void initialize() {
 		frame = new JFrame("Student Management System");
 		frame.getContentPane().setBackground(Color.WHITE);
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 546, 376);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		SpringLayout springLayout = new SpringLayout();
-		frame.getContentPane().setLayout(springLayout);
+		frame.getContentPane().setLayout(null);
 		
 		JLabel lblTeachersUsername = new JLabel("Teacher's Username");
-		springLayout.putConstraint(SpringLayout.WEST, lblTeachersUsername, 38, SpringLayout.WEST, frame.getContentPane());
+		lblTeachersUsername.setBounds(35, 129, 155, 15);
 		frame.getContentPane().add(lblTeachersUsername);
 		
 		JLabel lblPassword = new JLabel("Password");
-		springLayout.putConstraint(SpringLayout.NORTH, lblPassword, 75, SpringLayout.NORTH, frame.getContentPane());
-		springLayout.putConstraint(SpringLayout.WEST, lblPassword, 112, SpringLayout.WEST, frame.getContentPane());
-		springLayout.putConstraint(SpringLayout.EAST, lblPassword, -257, SpringLayout.EAST, frame.getContentPane());
-		springLayout.putConstraint(SpringLayout.SOUTH, lblTeachersUsername, -6, SpringLayout.NORTH, lblPassword);
-		springLayout.putConstraint(SpringLayout.EAST, lblTeachersUsername, 0, SpringLayout.EAST, lblPassword);
+		lblPassword.setBounds(102, 150, 135, 15);
 		frame.getContentPane().add(lblPassword);
 		
 		userText = new JTextField();
-		springLayout.putConstraint(SpringLayout.NORTH, userText, -2, SpringLayout.NORTH, lblTeachersUsername);
-		springLayout.putConstraint(SpringLayout.WEST, userText, 6, SpringLayout.EAST, lblTeachersUsername);
+		userText.setBounds(182, 127, 238, 19);
 		frame.getContentPane().add(userText);
 		userText.setColumns(10);
 		
 		passwordField = new JPasswordField();
-		springLayout.putConstraint(SpringLayout.NORTH, passwordField, 73, SpringLayout.NORTH, frame.getContentPane());
-		springLayout.putConstraint(SpringLayout.WEST, passwordField, 193, SpringLayout.WEST, frame.getContentPane());
-		springLayout.putConstraint(SpringLayout.EAST, passwordField, -120, SpringLayout.EAST, frame.getContentPane());
+		passwordField.setBounds(182, 148, 125, 19);
 		frame.getContentPane().add(passwordField);
 		
 		JButton btnLogin = new JButton("Login");
-		springLayout.putConstraint(SpringLayout.NORTH, btnLogin, 10, SpringLayout.SOUTH, passwordField);
-		springLayout.putConstraint(SpringLayout.WEST, btnLogin, 193, SpringLayout.WEST, frame.getContentPane());
+		btnLogin.setForeground(Color.WHITE);
+		btnLogin.setBackground(new Color(0, 204, 0));
+		btnLogin.setBounds(164, 174, 73, 25);
 		btnLogin.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
@@ -114,6 +111,9 @@ public class Main extends Methods {
 		frame.getContentPane().add(btnLogin);
 		
 		JButton btnCreateAccount = new JButton("Create Account");
+		btnCreateAccount.setForeground(Color.WHITE);
+		btnCreateAccount.setBackground(new Color(30, 144, 255));
+		btnCreateAccount.setBounds(249, 174, 142, 25);
 		btnCreateAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Make new register frame 
@@ -121,9 +121,50 @@ public class Main extends Methods {
 				register.createRegisterScreen();
 			}
 		});
-		springLayout.putConstraint(SpringLayout.NORTH, btnCreateAccount, 6, SpringLayout.SOUTH, btnLogin);
-		springLayout.putConstraint(SpringLayout.EAST, btnCreateAccount, -135, SpringLayout.EAST, frame.getContentPane());
 		frame.getContentPane().add(btnCreateAccount);
+		
+		JButton btnForgetPassword = new JButton("Forget Password");
+		btnForgetPassword.setForeground(Color.WHITE);
+		btnForgetPassword.setBackground(new Color(178, 34, 34));
+		btnForgetPassword.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ForgetPasswordFrame passwordForgetFrame = new ForgetPasswordFrame();
+				passwordForgetFrame.createForgetPasswordScreeen();
+			}
+		});
+		btnForgetPassword.setBounds(164, 203, 227, 25);
+		frame.getContentPane().add(btnForgetPassword);
+		
+		JCheckBox chckbxShowPassword = new JCheckBox("Show Password");
+		chckbxShowPassword.setBackground(Color.WHITE);
+		chckbxShowPassword.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(chckbxShowPassword.isSelected())
+				{
+					passwordField.setEchoChar((char) 0);
+				}
+				else {
+					passwordField.setEchoChar('*');
+				}
+			}
+		});
+		chckbxShowPassword.setBounds(306, 146, 138, 23);
+		frame.getContentPane().add(chckbxShowPassword);
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon("/home/tamerlan/eclipse-workspace/Student Management System/aydin-logo.jpg"));
+		label.setBounds(219, 12, 125, 96);
+		frame.getContentPane().add(label);
+		
+		JLabel lblOsamaAbualhyajaa = new JLabel("Osama Abualhyajaa");
+		lblOsamaAbualhyajaa.setFont(new Font("Lohit Devanagari", Font.BOLD, 12));
+		lblOsamaAbualhyajaa.setBounds(207, 281, 168, 15);
+		frame.getContentPane().add(lblOsamaAbualhyajaa);
+		
+		JLabel lblTamerlanGudabayev = new JLabel("Tamerlan Gudabayev");
+		lblTamerlanGudabayev.setFont(new Font("Lohit Devanagari", Font.BOLD, 12));
+		lblTamerlanGudabayev.setBounds(207, 296, 168, 15);
+		frame.getContentPane().add(lblTamerlanGudabayev);
 	}
 	
 	public void fileToArray() {
@@ -132,8 +173,8 @@ public class Main extends Methods {
 			Teachers.add(new Teacher(reader.next(), reader.next()));
 		}
 		
-		//for(int i = 0; i < Teachers.size(); i++ ) {
-			//System.out.println("Username: " + Teachers.get(i).getName() + " Password: " + Teachers.get(i).getPassword());
-		//}
+		for(int i = 0; i < Teachers.size(); i++ ) {
+			System.out.println("Username: " + Teachers.get(i).getName() + " Password: " + Teachers.get(i).getPassword());
+		}
 	}
 }

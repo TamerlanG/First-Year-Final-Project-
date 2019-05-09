@@ -14,7 +14,7 @@ public class Teacher implements Teacherable{
 
 	String name;
 	String password;
-	public ArrayList<Teacher> Teachers = new ArrayList<Teacher>();
+	public static ArrayList<Teacher> Teachers = new ArrayList<Teacher>();
 	public File fileTeacher = new File("teacherInfo.txt");
 	PrintWriter teacherPrinter;
 	Scanner reader;
@@ -56,8 +56,9 @@ public class Teacher implements Teacherable{
 	}
 
 	public Teacher findTeacher(String name) {
-		
 		return null;
+		
+		
 	}
 
 	public boolean verifyLogin(String name, String password) 
@@ -75,9 +76,6 @@ public class Teacher implements Teacherable{
 			
 		}
 		return false;
-		
-		
-		 
 	}
 	
 }
