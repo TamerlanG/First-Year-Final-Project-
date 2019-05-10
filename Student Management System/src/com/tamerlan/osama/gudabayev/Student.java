@@ -113,16 +113,16 @@ public class Student implements Studentable {
 	}
 	
 	public boolean searchStudent(String name, String surname) {
-		for(int i = 0; i < studentArrayList.size(); i++)
+		int counter = 0;
+		while(counter < studentArrayList.size())
 		{
-			if(name.equals(studentArrayList.get(i).getName()) && (surname.equals(studentArrayList.get(i).getSurname())))
+			if(name.equals(studentArrayList.get(counter).getName()) && (surname.equals(studentArrayList.get(counter).getSurname())))
 			{
 				return true;
 			}
-			else {
-				return false;
-			}
+			counter++;
 		}
+		
 		return false;
 	}
 	

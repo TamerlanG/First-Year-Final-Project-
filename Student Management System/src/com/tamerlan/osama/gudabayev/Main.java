@@ -20,7 +20,7 @@ import javax.swing.UIManager;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 
-public class Main extends Methods {
+public class Main extends Teacher {
 
 	private JFrame frame;
 	private JTextField userText;
@@ -173,8 +173,8 @@ public class Main extends Methods {
 			Teachers.add(new Teacher(reader.next(), reader.next()));
 		}
 		
-		for(int i = 0; i < Teachers.size(); i++ ) {
-			System.out.println("Username: " + Teachers.get(i).getName() + " Password: " + Teachers.get(i).getPassword());
-		}
+		//for(int i = 0; i < Teachers.size(); i++ ) {
+			//System.out.println("Username: " + Teachers.get(i).getName() + " Password: " + Teachers.get(i).getPassword());
+		//}
 	}
 }

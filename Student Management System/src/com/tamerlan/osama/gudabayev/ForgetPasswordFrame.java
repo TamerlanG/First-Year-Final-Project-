@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class ForgetPasswordFrame extends Teacher {
 
@@ -18,7 +19,8 @@ public class ForgetPasswordFrame extends Teacher {
 	private JTextField passwordTextField;
 	String username;
 	String password;
-
+	Main instance = new Main();
+	
 	/**
 	 * Launch the application.
 	 */
@@ -33,6 +35,8 @@ public class ForgetPasswordFrame extends Teacher {
 				}
 			}
 		});
+		Teachers.clear();
+		instance.fileToArray();
 	}
 
 	/**
@@ -56,14 +60,22 @@ public class ForgetPasswordFrame extends Teacher {
 			public void actionPerformed(ActionEvent e) {
 				username = usernameTextField.getText();
 				
-				for(int i = 0; i < Teachers.size(); i++)
+				for(int i = 0; i < Teachers.size(); i++) 
 				{
-					if(username.equals(Teachers.get(i).getName()))
+					System.out.println(Teachers.get(i).getName());
+					if(Teachers.get(i).getName().equals(username))
 					{
-						passwordTextField.setText(Teachers.get(i).getPassword());
-						System.out.println("ff");
+						password = Teachers.get(i).getPassword();
+						passwordTextField.setText(password);
+						break;
 					}
+					else
+					{
+	
+					}
+					
 				}
+				
 			}
 		});
 		btnShowMePassword.setBounds(100, 76, 225, 25);
@@ -83,6 +95,7 @@ public class ForgetPasswordFrame extends Teacher {
 		frame.getContentPane().add(lblYourPasswordIs);
 		
 		passwordTextField = new JTextField();
+		passwordTextField.setFont(new Font("Dialog", Font.PLAIN, 20));
 		passwordTextField.setBounds(123, 149, 171, 39);
 		frame.getContentPane().add(passwordTextField);
 		passwordTextField.setColumns(10);

@@ -20,6 +20,7 @@ public class RegisterFrame extends Teacher {
 	private JTextField userTextField;
 	private JTextField passwordTextField;
 	private JButton btnSignUp;
+	Main instance = new Main();
 	
 	
 		
@@ -37,6 +38,8 @@ public class RegisterFrame extends Teacher {
 				}
 			}
 		});
+		
+		instance.fileToArray();
 	}
 
 	/**
@@ -57,6 +60,7 @@ public class RegisterFrame extends Teacher {
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		SpringLayout springLayout = new SpringLayout();
 		frame.getContentPane().setLayout(springLayout);
+		
 		
 		
 		JLabel lblInputUsername = new JLabel("Input Username\n");
@@ -91,13 +95,21 @@ public class RegisterFrame extends Teacher {
 				String username = userTextField.getText();
 				String password = passwordTextField.getText();
 				
+				
 			if(teacherExists(username)) {
 				JOptionPane.showMessageDialog(frame, "ACCOUNT NAME ALREADY EXISTS");
 			}
 			else
 			{
+				Teachers.clear();
 				Teachers.add(new Teacher(username, password));
-				
+				Student instance = new Student();
+				try {
+					instance.clearTheFile();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				for(int i = 0;i < Teachers.size(); i++)
 				{
 					
@@ -107,8 +119,8 @@ public class RegisterFrame extends Teacher {
 				
 				
 				
-				Main instance = new Main();
-				instance.fileToArray();
+				
+				
 				teacherPrinter.flush();
 				JOptionPane.showMessageDialog(frame, "Account Created");
 				frame.dispose();
@@ -124,20 +136,4 @@ public class RegisterFrame extends Teacher {
 		frame.getContentPane().add(btnSignUp);
 	}
 	
-	public boolean teacherExists(String name)
-	{
-		
-		for(int i = 0; i < Teachers.size(); i++) 
-		{
-			System.out.println(Teachers.get(i).getName());
-			if(Teachers.get(i).getName().equals(name))
-			{
-				System.out.println("Name Exists");
-				return true;	
-			}
-			
-		}
-		return false;
-		
-	}
 }

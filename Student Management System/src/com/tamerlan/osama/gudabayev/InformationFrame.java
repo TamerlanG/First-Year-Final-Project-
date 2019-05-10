@@ -26,6 +26,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class InformationFrame extends Student{
 
@@ -107,12 +109,33 @@ public class InformationFrame extends Student{
 		frame.getContentPane().add(lblComputerGpa);
 		
 		firstNameTextField = new JTextField();
+		firstNameTextField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				int key = e.getKeyCode();
+				
+				if(key == 10)
+				{
+					surnameTextField.requestFocus();
+				}
+			}
+		});
 		springLayout.putConstraint(SpringLayout.WEST, firstNameTextField, 100, SpringLayout.WEST, frame.getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, lblName, -6, SpringLayout.WEST, firstNameTextField);
 		frame.getContentPane().add(firstNameTextField);
 		firstNameTextField.setColumns(10);
 		
 		surnameTextField = new JTextField();
+		surnameTextField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				int key = e.getKeyCode();
+				if(key == 10)
+				{
+					ageTextField.requestFocus();
+				}
+			}
+		});
 		springLayout.putConstraint(SpringLayout.WEST, surnameTextField, 100, SpringLayout.WEST, frame.getContentPane());
 		springLayout.putConstraint(SpringLayout.NORTH, firstNameTextField, -25, SpringLayout.NORTH, surnameTextField);
 		springLayout.putConstraint(SpringLayout.SOUTH, firstNameTextField, -10, SpringLayout.NORTH, surnameTextField);
@@ -123,6 +146,16 @@ public class InformationFrame extends Student{
 		surnameTextField.setColumns(10);
 		
 		ageTextField = new JTextField();
+		ageTextField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				int key = e.getKeyCode();
+				if(key == 10)
+				{
+					mathGpaTextField.requestFocus();
+				}
+			}
+		});
 		springLayout.putConstraint(SpringLayout.NORTH, ageTextField, -2, SpringLayout.NORTH, lblAge);
 		springLayout.putConstraint(SpringLayout.WEST, ageTextField, 6, SpringLayout.EAST, lblAge);
 		springLayout.putConstraint(SpringLayout.EAST, ageTextField, 0, SpringLayout.EAST, firstNameTextField);
@@ -130,6 +163,16 @@ public class InformationFrame extends Student{
 		ageTextField.setColumns(10);
 		
 		mathGpaTextField = new JTextField();
+		mathGpaTextField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				int key = e.getKeyCode();
+				if(key == 10)
+				{
+					physicsGpaTextField.requestFocus();
+				}
+			}
+		});
 		springLayout.putConstraint(SpringLayout.NORTH, mathGpaTextField, 6, SpringLayout.SOUTH, ageTextField);
 		springLayout.putConstraint(SpringLayout.SOUTH, mathGpaTextField, -345, SpringLayout.SOUTH, frame.getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, mathGpaTextField, 0, SpringLayout.EAST, firstNameTextField);
@@ -137,6 +180,16 @@ public class InformationFrame extends Student{
 		mathGpaTextField.setColumns(10);
 		
 		physicsGpaTextField = new JTextField();
+		physicsGpaTextField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				int key = e.getKeyCode();
+				if(key == 10)
+				{
+					computerGpaTextField.requestFocus();
+				}
+			}
+		});
 		springLayout.putConstraint(SpringLayout.NORTH, physicsGpaTextField, 6, SpringLayout.SOUTH, mathGpaTextField);
 		springLayout.putConstraint(SpringLayout.WEST, physicsGpaTextField, 0, SpringLayout.WEST, firstNameTextField);
 		springLayout.putConstraint(SpringLayout.SOUTH, physicsGpaTextField, -324, SpringLayout.SOUTH, frame.getContentPane());

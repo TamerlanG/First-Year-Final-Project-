@@ -78,4 +78,22 @@ public class Teacher implements Teacherable{
 		return false;
 	}
 	
+	public boolean teacherExists(String name)
+	{
+		System.out.println(Teachers.size());
+		for(int i = 0; i < Teachers.size(); i++) 
+		{
+			if(Teachers.get(i).getName().equals(name))
+			{
+				//System.out.println("Name Exists");
+				return true;	
+			}
+			
+		}
+		return false;
+		
+	}
+	
+	
+	
 }
